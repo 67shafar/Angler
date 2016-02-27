@@ -1,0 +1,50 @@
+{
+  "name": "Angler Web Seed",
+  "version": "0.8.0",
+  "description": "Development enviorment using AngularJS and ExpressJS with cucumber and mocha for testing. This enviorment allows coding in coffeescript, sass, and haml.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "development enviorment",
+    "node",
+    "angularjs",
+    "expressjs",
+    "sass",
+    "haml",
+    "npm",
+    "bower",
+    "setup",
+    "direcotry"
+  ],
+  "author": "Shane Allen Farrar",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "chai-as-promised": "^5.1.0",
+    "cucumber": "^0.9.1",
+    "grunt": "^0.4.5",
+    "grunt-connect": "^0.2.0",
+    "grunt-contrib-clean": "^0.7.0",
+    "grunt-contrib-coffee": "^0.13.0",
+    "grunt-contrib-compass": "^1.0.4",
+    "grunt-contrib-haml": "^0.2.0",
+    "grunt-contrib-uglify": "^0.11.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-cucumber": "^0.3.0",
+    "grunt-env": "^0.4.4",
+    "grunt-mocha": "^0.4.13",
+    "grunt-mocha-test": "^0.12.7",
+    "grunt-shell": "^1.1.2",
+    "mocha": "^2.3.4",
+    "mocha-cucumber": "0.0.5",
+    "protractor": "^3.0.0"
+  },
+  "dependencies": {
+    "basic-auth": "^1.0.3",
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "njwt": "^0.2.3"
+  }
+}

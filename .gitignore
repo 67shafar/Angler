@@ -1,0 +1,15 @@
+**/.sass-cache/
+**/bower_components/
+**/node_modules/
+**/.DS_STORE
+**/.idea
+
+/public/app
+/public/*.*
+/public/assets/css/common
+/public/assets/css/components
+/public/assets/css/main.css
+
+/server
+
+**/npm-debug.log

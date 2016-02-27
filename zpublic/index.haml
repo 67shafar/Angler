@@ -1,0 +1,15 @@
+!!!
+%html{"ng-app" => "Angler", "ng-controller" => "MainCtrl"}
+  %head
+    %meta{:charset => "utf-8"}
+    %title AnglerCupOfJoe - {{ page.title() }}
+    %link{:href => "assets/css/main.css", :rel => "stylesheet"}
+  %body
+    %nav-bar
+    %div{'ng-view' => true}
+    %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"}
+    %script{:src => "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"}
+    %script{:src => "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.min.js"}
+    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/angular-css/1.0.7/angular-css.min.js"}
+    %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"}
+    %script{:src => "app/app.min.js"}
