@@ -42,7 +42,7 @@ module.exports = (grunt)->
           stdout: true
 
     coffee:
-      dev:
+      pubDev:
         options:
           sourceMap: true
           join: true
@@ -50,30 +50,46 @@ module.exports = (grunt)->
           src: '<%= project.coffee %>/**/*.coffee'
           dest:'<%= project.app %>/app.js'
         ]
-      dev2:
+      srvDev:
         options:
+          sourceMap: true
           join: true
         files: [
-          src: 'zserver/**/*.coffee'
+          src: 'zserver/app/**/*.coffee'
           dest:'server/app.js'
         ]
-      dist:
+       pubDist:
         options:
           join: true
         files: [
           src: '<%= project.coffee %>/**/*.coffee'
           dest:'<%= project.app %>/app.js'
         ]
-      dist2:
+      srvDist:
         options:
           join: true
         files: [
-          src: 'zserver/**/*.coffee'
+          src: 'zserver/app/**/*.coffee'
           dest:'server/app.js'
+        ]
+      libDev:
+        options:
+          sourceMap: true
+          join: true
+        files: [
+          src: 'zserver/lib/**/*.coffee'
+          dest:'server/lib.js'
+        ]
+      libDist:
+        options:
+          join: true
+        files: [
+          src: 'zserver/lib/**/*.coffee'
+          dest:'server/lib.js'
         ]
 
     compass:
-      dev:
+      pubDev:
         options:
           basePath: 'public/'
           outputStyle: 'expanded'
@@ -82,7 +98,7 @@ module.exports = (grunt)->
           imagesDir: 'assets/img'
           javascriptsDir: 'assets/js'
           fontsDir: 'assets/fonts'
-      dist:
+      pubDist:
         options:
           basePath: 'public/'
           cssDir: 'assets/css'
@@ -93,14 +109,14 @@ module.exports = (grunt)->
           outputStyle: 'compressed'
 
     haml:
-      dev:
+      pubDev:
         expand: true
         cwd: 'zpublic'
         src: '**/*.haml'
         dest: 'public'
         ext: '.html'
         flatten: false
-      dist:
+      pubDist:
         expand: true
         cwd: 'zpublic'
         src: '**/*.haml'
@@ -115,11 +131,12 @@ module.exports = (grunt)->
       build:
         src: ['public/**/*.html', 'public/**/*.js', 'public/**/*.css',
               'public/**/*.map', 'server/**/*.js']
-      dist:
-        src: ['public/app/app.js', 'server/app.js']
+      pubDist:
+        src: ['public/app/app.js', 'server/app.js', 'server/lib.js']
+
 
     uglify:
-      dev:
+      pubDev:
         options:
           sourceMapIn: '<%= project.app %>/app.js.map'
           sourceMap: true
@@ -128,33 +145,43 @@ module.exports = (grunt)->
           src: '<%= project.app %>/app.js'
           dest: '<%= project.app %>/app.min.js'
         ]
-      dist:
+      pubDist:
         files: [
           src: '<%= project.app %>/app.js'
           dest: '<%= project.app %>/app.min.js'
         ]
-      dev2:
+      srvDev:
         files: [
           src: 'server/app.js'
           dest: 'server/app.min.js'
         ]
-      dist2:
+      srvDist:
         files: [
           src: 'server/app.js'
           dest: 'server/app.min.js'
+        ]
+      libDist:
+        files: [
+          src: 'server/lib.js'
+          dest: 'server/lib.min.js'
+        ]
+      libDev:
+        files: [
+          src: 'server/lib.js'
+          dest: 'server/lib.min.js'
         ]
 
     watch:
       haml:
         files:['zpublic/**/*.haml']
-        tasks: ['haml:dev']
+        tasks: ['haml:pubDev']
       coffee:
         files: ['<%= project.coffee %>/**/*.coffee']
-        tasks: ['coffee:dev', 'coffee:dev2', 'uglify:dev']
+        tasks: ['coffee:pubDev', 'coffee:srvDev', 'uglify:pubDev']
       compass:
         files: ['<%= project.sass %>/**/*.sass',
                 '<%= project.sass %>/**/*.scss']
-        tasks: ['compass:dev']
+        tasks: ['compass:pubDev']
 
 
     mochaTest:
@@ -176,12 +203,13 @@ module.exports = (grunt)->
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
   grunt.registerTask 'server', ['connect:server']
-  grunt.registerTask 'default', ['compass:dev','coffee:dev', 'coffee:dev2', 'haml:dev',
-                                 'uglify:dev', 'uglify:dev2']
+  grunt.registerTask 'default', ['compass:pubDev','coffee:pubDev', 'coffee:srvDev', 'haml:pubDev', 'coffee:libDev'
+                                 'uglify:pubDev', 'uglify:srvDev']
   grunt.registerTask 'selenium', ['shell:selenium']
   grunt.registerTask 'e2e', ['env:test', 'cucumberjs']
   grunt.registerTask 'unit', ['mochaTest:unit']
-  grunt.registerTask 'build', ['clean:all', 'compass:dev','coffee:dev', 'coffee:dev2',
-                               'haml:dev', 'uglify:dev', 'uglify:dev2']
-  grunt.registerTask 'publish', ['clean:all', 'compass:dist', 'coffee:dist', 'coffee:dist2',
-                                 'haml:dist', 'uglify:dist', 'uglify:dist2', 'clean:dist']
+  grunt.registerTask 'build', ['clean:all', 'compass:pubDev','coffee:pubDev', 'coffee:srvDev', 'coffee:libDev'
+                               'haml:pubDev', 'uglify:pubDev', 'uglify:srvDev', 'uglify:libDev']
+  grunt.registerTask 'publish', ['clean:all', 'compass:pubDist', 'coffee:pubDist', 'coffee:srvDist',
+                                 'haml:pubDist', 'uglify:pubDist', 'uglify:srvDist', 'clean:pubDist', 'coffee:libDist'
+                                 'uglify:libDist']
