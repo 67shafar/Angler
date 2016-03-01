@@ -9,9 +9,9 @@ app.post '/token', (req, res) ->
     res.send 'Invalid Login'
 
   #Authenticate user name and password here
-  if(cred.name == 'Aladdin' && cred.pass = 'OpenSesame')
+  if(cred.name == 'Aladdin' && cred.pass == 'OpenSesame')
 
-#Create the claim
+    #Create the claim
     claim =
       "sub": cred.name
       "iss": 'localhost'
@@ -26,7 +26,7 @@ app.post '/token', (req, res) ->
     res.header 'token', jwt
     res.send 'Here have a token!'
 
-#If authentication fails, send this message.
+  #If authentication fails, send this message.
   else
     res.send 'Invalid log in'
 

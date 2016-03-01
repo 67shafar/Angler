@@ -127,7 +127,8 @@ module.exports = (grunt)->
     clean:
       all:
         src: ['public/app/**/*', 'public/**/*.html', 'public/**/*.js',
-              'public/**/*.css', 'public/**/*.map', 'server/**/*.js']
+              'public/**/*.css', 'public/**/*.map', 'server/**/*.js',
+              'server/**/*.map', 'server/**/*.coffee']
       build:
         src: ['public/**/*.html', 'public/**/*.js', 'public/**/*.css',
               'public/**/*.map', 'server/**/*.js']
